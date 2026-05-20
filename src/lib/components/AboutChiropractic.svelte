@@ -53,8 +53,7 @@
             </div>
           </div>
           <p class="text-sm text-slate-600">
-            Atención quiropráctica de nivel clínico respaldada por especialidad
-            anatómica.
+            Atención quiropráctica de nivel clínico respaldada por la Universidad Estatal del Valle de Toluca.
           </p>
         </div>
       </div>
