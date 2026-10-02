@@ -141,7 +141,7 @@ export async function createSpineViewer(host: HTMLElement, opts: SpineViewerOpti
       const t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
       const span = Math.max(s.y, s.x / Math.max(camera.aspect, .5), 2);
       goal.y = c.y;
-      goal.dist = Math.min(fullDistance(), span / (2 * t) * (side === 'bottom' ? 1.55 : 1.35));
+      goal.dist = Math.min(fullDistance(), span / (2 * t) * (side === 'bottom' ? 2.3 : 2));
       goal.offsetX = side === 'right' ? w * .2 : 0;
       goal.offsetY = side === 'bottom' ? h * .17 : 0;
     } else {
