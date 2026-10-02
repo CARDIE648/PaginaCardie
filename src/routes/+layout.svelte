@@ -25,14 +25,27 @@
     content="Especialistas en bienestar físico y corrección de postura. Dile adiós al dolor."
   />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://cardiequiropráctico.com" />
+  <meta property="og:url" content="https://xn--cardiequiroprctico-bsb.com/" />
+  <meta property="og:site_name" content="CARDIE Quiropráctico" />
+  <meta name="application-name" content="CARDIE Quiropráctico" />
+  <link rel="canonical" href="https://xn--cardiequiroprctico-bsb.com/" />
+  <!-- Nombre del sitio en Google (en vez del dominio en punycode) -->
+  {@html `<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "CARDIE Quiropráctico",
+    "alternateName": ["CARDIE", "Clínica CARDIE", "cardiequiropráctico.com"],
+    "url": "https://xn--cardiequiroprctico-bsb.com/"
+  }
+  </script>`}
   {@html `<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "MedicalClinic",
     "name": "CARDIE",
     "description": "Clínica especializada en ajustes quiroprácticos y bienestar integral.",
-    "url": "https://cardiequiropráctico.com",
+    "url": "https://xn--cardiequiroprctico-bsb.com/",
     "telephone": "+52 729 114 3732",
     "address": {
       "@type": "PostalAddress",
