@@ -10,7 +10,7 @@
   <div class="relative z-10 w-full flex flex-col lg:flex-row min-h-screen">
     <!-- LEFT SIDE: Content & Frosted Glass Layer -->
     <div
-      class="relative w-full lg:w-1/2 flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:pl-32 py-20 lg:py-0 min-h-[50vh] lg:min-h-screen lg:justify-start lg:pt-[35vh]"
+      class="relative w-full lg:w-1/2 flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:pl-32 pt-28 pb-12 sm:py-20 lg:py-0 sm:min-h-[50vh] lg:min-h-screen lg:justify-start lg:pt-[35vh]"
     >
       <!-- Milky Glass Overlay (Responsible for the 50% split on large screens) -->
       <div
@@ -18,23 +18,29 @@
       ></div>
 
       <div class="relative flex flex-col lg:items-end">
-        <h4
+        <p
           class="text-slate-500 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.4em] uppercase mb-2 lg:mb-4 opacity-80 lg:absolute lg:bottom-full lg:right-4 pl-1 text-center lg:text-right animate-fadeIn"
         >
           Cuidado Exacto Para Tu
-        </h4>
+        </p>
 
-        <h1
+        <p
           class="hero-word font-black uppercase tracking-[-0.05em] leading-[0.8] text-[#215A69] drop-shadow-sm transition-all duration-500 hover:tracking-tight animate-slideRight text-center lg:text-right lg:pr-4"
         >
           COLUMNA
-        </h1>
+        </p>
 
-        <h4
-          class="text-slate-500 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.4em] uppercase mb-2 lg:mb-4 opacity-80 pl-1 text-center lg:text-right animate-fadeIn mt-2"
+        <!-- Título principal para Google: lo que la gente busca (servicio + zona) -->
+        <h1
+          class="text-[#215A69] text-[11px] sm:text-xs lg:text-sm font-extrabold tracking-[0.3em] uppercase pl-1 text-center lg:text-right animate-fadeIn mt-4 lg:pr-4"
         >
-          CONTIGO EN CADA PASO HACIA TU SALUD VERTEBRAL
-        </h4>
+          Quiropráctico en Zinacantepec
+        </h1>
+        <p
+          class="text-slate-500 text-[10px] sm:text-xs lg:text-sm font-bold tracking-[0.4em] uppercase mb-2 lg:mb-4 opacity-80 pl-1 text-center lg:text-right animate-fadeIn mt-1 lg:pr-4"
+        >
+          Contigo en cada paso hacia tu salud vertebral
+        </p>
 
         <!-- Request Consultation specifically for mobile/touch or desktop side links -->
         <div
@@ -67,16 +73,16 @@
 
     <!-- RIGHT SIDE: Wellness & Sharp Imagery -->
     <div
-      class="relative w-full lg:w-1/2 flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:pr-32 py-20 lg:py-0 min-h-[50vh] lg:min-h-screen lg:justify-start lg:pt-[35vh]"
+      class="relative w-full lg:w-1/2 flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:pr-32 pt-14 pb-28 sm:py-20 lg:py-0 min-h-[62svh] sm:min-h-[50vh] lg:min-h-screen lg:justify-start lg:pt-[35vh]"
     >
       <HeroVideo />
 
       <div class="relative flex flex-col lg:items-start pointer-events-none">
-        <h1
+        <p
           class="hero-word font-black text-white uppercase tracking-[-0.05em] leading-[0.8] mb-8 drop-shadow-2xl animate-slideLeft text-center lg:text-left lg:pl-4"
         >
           BIENESTAR
-        </h1>
+        </p>
 
         <!-- Content Card: Better organized for laptop/mobile readability -->
         <div
@@ -97,7 +103,7 @@
       <!-- Invitación al explorador 3D de la siguiente sección -->
       <a
         href="#about"
-        class="group absolute bottom-6 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-20 xl:left-24 lg:bottom-10 z-20 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 pl-2 pr-5 py-2 text-white backdrop-blur-md shadow-xl hover:bg-white hover:text-[#215A69] transition-colors"
+        class="group absolute bottom-6 left-6 sm:left-12 lg:left-20 xl:left-24 lg:bottom-10 z-20 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 pl-2 pr-5 py-2 text-white backdrop-blur-md shadow-xl hover:bg-white hover:text-[#215A69] transition-colors"
       >
         <span class="grid h-9 w-9 place-items-center rounded-full bg-white/20 group-hover:bg-[#215A69] group-hover:text-white transition-colors">
           <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"

@@ -75,7 +75,7 @@
         >Servicios</a
       >
       <a
-        href="#contact"
+        href="#ubicacion"
         class="text-[12px] font-bold uppercase tracking-[0.15em] transition-colors {linkClass}"
         >Ubicación</a
       >
@@ -133,7 +133,7 @@
         </li>
         <li>
           <a
-            href="#contact"
+            href="#ubicacion"
             class="text-slate-600 hover:text-slate-900 text-lg font-medium tracking-wide uppercase px-0"
             >Ubicación</a
           >

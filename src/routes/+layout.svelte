@@ -2,62 +2,117 @@
   import "../app.css";
   import Navbar from "$lib/components/Navbar.svelte";
   import Footer from "$lib/components/Footer.svelte";
+  import { SITE_URL, clinic, faqs } from "$lib/clinic.js";
 
   let { children } = $props();
+
+  const title = "Quiropráctico en Zinacantepec, cerca de Toluca | CARDIE";
+  const description = `Clínica quiropráctica en Zinacantepec: alivio al dolor de espalda, cuello y ciática, y corrección de postura. Consulta $${clinic.price}. Agenda por WhatsApp.`;
+  const ogImage = `${SITE_URL}/og-image.jpg`;
+
+  // Datos estructurados: sitio, clínica (negocio local) y preguntas frecuentes
+  const clinicId = `${SITE_URL}/#clinic`;
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": `${SITE_URL}/#website`,
+        name: clinic.name,
+        alternateName: ["CARDIE", "Clínica CARDIE", "cardiequiropráctico.com"],
+        url: `${SITE_URL}/`,
+        inLanguage: "es-MX",
+        publisher: { "@id": clinicId },
+      },
+      {
+        "@type": ["MedicalClinic", "LocalBusiness"],
+        "@id": clinicId,
+        name: clinic.name,
+        alternateName: "Quiropráctico CARDIE",
+        description:
+          "Clínica quiropráctica en Zinacantepec, Estado de México: evaluación postural, ajuste quiropráctico específico y fortalecimiento muscular.",
+        url: `${SITE_URL}/`,
+        image: ogImage,
+        logo: `${SITE_URL}/LogoIcono.png`,
+        telephone: clinic.phones[0],
+        email: clinic.email,
+        priceRange: `$${clinic.price} MXN`,
+        currenciesAccepted: "MXN",
+        medicalSpecialty: "Chiropractic",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: `${clinic.address.street}, ${clinic.address.neighborhood}`,
+          addressLocality: clinic.address.city,
+          addressRegion: clinic.address.region,
+          postalCode: clinic.address.postalCode,
+          addressCountry: clinic.address.country,
+        },
+        geo: { "@type": "GeoCoordinates", latitude: clinic.geo.lat, longitude: clinic.geo.lng },
+        hasMap: clinic.mapsUrl,
+        areaServed: [
+          { "@type": "City", name: "Zinacantepec" },
+          { "@type": "City", name: "Toluca" },
+        ],
+        contactPoint: clinic.phones.map((telephone) => ({
+          "@type": "ContactPoint",
+          telephone,
+          contactType: "reservations",
+          availableLanguage: "es",
+        })),
+        sameAs: clinic.social,
+        makesOffer: {
+          "@type": "Offer",
+          price: clinic.price,
+          priceCurrency: "MXN",
+          itemOffered: { "@type": "MedicalProcedure", name: "Consulta quiropráctica" },
+        },
+        employee: clinic.practitioners.map((name) => ({ "@type": "Person", name, jobTitle: "Quiropráctico" })),
+      },
+      {
+        "@type": "FAQPage",
+        "@id": `${SITE_URL}/#faq`,
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+    ],
+  };
+  const jsonLd = JSON.stringify(graph).replace(/</g, "\\u003c");
 </script>
 
 <svelte:head>
   <link rel="icon" href="/LogoNavegador.png" type="image/png" />
   <link rel="apple-touch-icon" href="/LogoNavegador.png" />
-  <title>CARDIE | Clínica Quiropráctica y Ajuste Espinal</title>
-  <meta
-    name="description"
-    content="Encuentra alivio al dolor de espalda, cuello y mejora tu postura con los especialistas de CARDIE. Agenda tu cita quiropráctica hoy mismo."
-  />
+  <title>{title}</title>
+  <meta name="description" content={description} />
   <meta
     name="keywords"
-    content="quiropráctico, ajuste espinal, dolor de espalda, postura, CARDIE, clínica quiropráctica"
+    content="quiropráctico Zinacantepec, quiropráctico Toluca, quiropráctico cerca de mí, ajuste quiropráctico, dolor de espalda, dolor de cuello, ciática, postura, CARDIE"
   />
+  <meta name="geo.region" content="MX-MEX" />
+  <meta name="geo.placename" content="Zinacantepec" />
+  <meta name="geo.position" content="{clinic.geo.lat};{clinic.geo.lng}" />
+  <meta name="ICBM" content="{clinic.geo.lat}, {clinic.geo.lng}" />
 
-  <meta property="og:title" content="CARDIE | Tu Clínica Quiropráctica" />
-  <meta
-    property="og:description"
-    content="Especialistas en bienestar físico y corrección de postura. Dile adiós al dolor."
-  />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://xn--cardiequiroprctico-bsb.com/" />
-  <meta property="og:site_name" content="CARDIE Quiropráctico" />
-  <meta name="application-name" content="CARDIE Quiropráctico" />
-  <link rel="canonical" href="https://xn--cardiequiroprctico-bsb.com/" />
-  <!-- Nombre del sitio en Google (en vez del dominio en punycode) -->
-  {@html `<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "CARDIE Quiropráctico",
-    "alternateName": ["CARDIE", "Clínica CARDIE", "cardiequiropráctico.com"],
-    "url": "https://xn--cardiequiroprctico-bsb.com/"
-  }
-  </script>`}
-  {@html `<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "CARDIE",
-    "description": "Clínica especializada en ajustes quiroprácticos y bienestar integral.",
-    "url": "https://xn--cardiequiroprctico-bsb.com/",
-    "telephone": "+52 729 114 3732",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Av. 16 de Septiembre 339-A, Interior 1, Vista Nevado I",
-      "addressLocality": "San Miguel Zinacantepec",
-      "addressRegion": "Estado de México",
-      "postalCode": "51350",
-      "addressCountry": "MX"
-    },
-    "medicalSpecialty": "Chiropractic"
-  }
-  </script>`}
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:url" content="{SITE_URL}/" />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Portada de CARDIE Quiropráctico en Zinacantepec" />
+  <meta property="og:site_name" content={clinic.name} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="application-name" content={clinic.name} />
+  <link rel="canonical" href="{SITE_URL}/" />
+  {@html `<script type="application/ld+json">${jsonLd}<\/script>`}
 </svelte:head>
 
 <div

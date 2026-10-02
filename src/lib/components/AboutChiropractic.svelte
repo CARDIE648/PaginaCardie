@@ -2,7 +2,7 @@
   import SpineScene from "./SpineScene.svelte";
 </script>
 
-<section id="about" class="py-24 bg-white relative overflow-hidden">
+<section id="about" class="py-14 sm:py-20 lg:py-24 bg-white relative overflow-hidden">
   <!-- Clean Medical Background Decor -->
   <div
     class="absolute top-0 right-0 w-1/3 h-full bg-slate-50 -skew-x-12 transform origin-top"
@@ -12,14 +12,10 @@
   ></div>
 
   <div class="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
-    <div class="grid lg:grid-cols-2 gap-16 items-center">
+    <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
       <!-- Left: Clinical Image or Abstract Shape -->
       <div class="relative">
-        <div
-          class="aspect-[4/5] sm:aspect-[5/6] lg:aspect-[4/5] max-h-[820px] w-full rounded-3xl overflow-hidden shadow-2xl relative z-10 border border-slate-100 bg-white"
-        >
-          <SpineScene />
-        </div>
+        <SpineScene />
 
       </div>
 

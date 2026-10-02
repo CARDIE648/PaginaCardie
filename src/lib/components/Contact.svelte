@@ -1,14 +1,14 @@
 <script>
-  const whatsappNumber = "7291143732"; // Reemplazar con el número real de WhatsApp SIN el signo +
+  import { clinic, addressOneLine } from "$lib/clinic.js";
   const msgWhatsApp =
     "Hola Clínica Cardie, me gustaría agendar una evaluación inicial.";
   const encodedMsg = encodeURIComponent(msgWhatsApp);
 </script>
 
-<section id="contact" class="py-24 bg-white relative">
+<section id="contact" class="py-14 sm:py-20 lg:py-24 bg-white relative">
   <div class="max-w-[1400px] mx-auto px-6 md:px-12">
     <div
-      class="bg-slate-50 border border-slate-100 rounded-3xl p-10 md:p-16 shadow-xl relative overflow-hidden"
+      class="bg-slate-50 border border-slate-100 rounded-3xl px-5 py-8 sm:p-10 md:p-16 shadow-xl relative overflow-hidden"
     >
       <!-- Medical Decor -->
       <div
@@ -130,7 +130,7 @@
         <!-- Right: CTA Card -->
         <div class="flex flex-col gap-6 justify-center max-w-sm mx-auto w-full">
           <a
-            href={`https://wa.me/${whatsappNumber}?text=${encodedMsg}`}
+            href={`https://wa.me/${clinic.whatsapp}?text=${encodedMsg}`}
             target="_blank"
             class="bg-[#215A69] hover:bg-[#83B7AB] text-white p-6 rounded-2xl flex flex-col items-center gap-4 transition-all duration-500 shadow-none hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(33,90,105,0.6)]"
             aria-label="Contactar por WhatsApp"
@@ -161,15 +161,53 @@
           >
             <span>O Llámanos:</span>
             <div class="flex flex-col gap-1">
-              <span class="text-slate-800 font-bold"
-                >+52 {whatsappNumber.replace(
-                  /(\d{3})(\d{3})(\d{4})/,
-                  "$1 $2 $3",
-                )}</span
-              >
-              <span class="text-slate-800 font-bold">+52 722 387 3457</span>
+              <!-- En celular se tocan para llamar -->
+              {#each clinic.phones as phone}
+                <a href="tel:{phone.replace(/\s/g, '')}" class="text-slate-800 font-bold py-1 hover:text-[#215A69]">{phone}</a>
+              {/each}
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- Ubicación: dirección y mapa de la clínica -->
+      <div id="ubicacion" class="relative z-10 mt-14 pt-10 border-t border-slate-200 grid md:grid-cols-5 gap-8 items-stretch scroll-mt-28">
+        <div class="md:col-span-2 flex flex-col justify-center">
+          <h3 class="text-[#215A69] font-bold uppercase tracking-[0.2em] text-sm mb-3">Ubicación</h3>
+          <h2 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight leading-tight mb-4">
+            Quiropráctico en Zinacantepec, a minutos de Toluca
+          </h2>
+          <address class="not-italic text-slate-600 font-light leading-relaxed mb-6">
+            {clinic.address.street}<br />
+            Col. {clinic.address.neighborhood}, C.P. {clinic.address.postalCode}<br />
+            {clinic.address.city}, Estado de México
+          </address>
+          <a
+            href={clinic.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex w-fit items-center gap-3 rounded-xl bg-slate-900 px-6 py-3 text-xs font-bold uppercase tracking-[0.18em] text-white hover:bg-[#215A69] transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+              ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              /></svg
+            >
+            Cómo llegar
+          </a>
+        </div>
+        <div class="md:col-span-3 min-h-[280px] md:min-h-[340px] rounded-2xl overflow-hidden border border-slate-200 shadow-md bg-slate-100">
+          <iframe
+            title={`Mapa: ${addressOneLine}`}
+            src={clinic.mapsEmbed}
+            class="w-full h-full min-h-[280px] md:min-h-[340px] border-0"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
         </div>
       </div>
     </div>
@@ -178,9 +216,9 @@
 
 <!-- Widget Botón Flotante Fijo WhatsApp -->
 <a
-  href={`https://wa.me/${whatsappNumber}?text=${encodedMsg}`}
+  href={`https://wa.me/${clinic.whatsapp}?text=${encodedMsg}`}
   target="_blank"
-  class="fixed bottom-6 right-6 z-50 bg-[#83B7AB] hover:bg-[#215A69] text-white p-4 rounded-full shadow-none hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(33,90,105,0.6)] transition-all duration-500 group"
+  class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 bg-[#83B7AB] hover:bg-[#215A69] text-white p-3 sm:p-4 rounded-full shadow-lg sm:shadow-none shadow-none hover:-translate-y-2 hover:shadow-[0_20px_40px_rgba(33,90,105,0.6)] transition-all duration-500 group"
   aria-label="Contactar por WhatsApp"
 >
   <!-- Tooltip -->
@@ -189,7 +227,7 @@
   >
     Agendar Cita Rápidamente
   </span>
-  <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+  <svg class="w-7 h-7 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24">
     <path
       d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.888-.788-1.487-1.761-1.663-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"
     />

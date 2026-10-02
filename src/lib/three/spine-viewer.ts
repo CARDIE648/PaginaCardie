@@ -13,8 +13,8 @@ export interface SpineViewerOptions {
   onSelect?(region: RegionKey | null): void;
   onInteract?(): void;
   onFailure?(): void;
-  /** Dónde queda la ficha de información: 'right' en escritorio, 'bottom' en celular. */
-  panelSide?(): 'right' | 'bottom';
+  /** Dónde queda la ficha: 'right' (encima, a la derecha) o 'none' (fuera del lienzo, en celular). */
+  panelSide?(): 'right' | 'bottom' | 'none';
 }
 
 export interface SpineViewer {
@@ -141,7 +141,7 @@ export async function createSpineViewer(host: HTMLElement, opts: SpineViewerOpti
       const t = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
       const span = Math.max(s.y, s.x / Math.max(camera.aspect, .5), 2);
       goal.y = c.y;
-      goal.dist = Math.min(fullDistance(), span / (2 * t) * (side === 'bottom' ? 2.3 : 2));
+      goal.dist = Math.min(fullDistance(), span / (2 * t) * (side === 'right' ? 2 : 2.2));
       goal.offsetX = side === 'right' ? w * .2 : 0;
       goal.offsetY = side === 'bottom' ? h * .17 : 0;
     } else {

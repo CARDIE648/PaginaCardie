@@ -1,6 +1,10 @@
-<footer class="bg-[#215A69] border-[#83B7AB] text-white py-16">
+<script>
+  import { clinic } from "$lib/clinic.js";
+</script>
+
+<footer class="bg-[#215A69] border-[#83B7AB] text-white pt-14 pb-24 sm:py-16">
   <div class="max-w-[1400px] mx-auto px-6 md:px-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
       <!-- Brand & Trust -->
       <div class="space-y-6">
         <a href="#hero" class="flex flex-col w-fit group">
@@ -37,7 +41,7 @@
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
               />
             </svg>
-            <span class="font-bold">+52 729 114 3732</span>
+            <a href="tel:+527291143732" class="font-bold hover:text-[#83B7AB]">+52 729 114 3732</a>
           </div>
           <div class="flex items-center gap-2">
             <svg
@@ -53,17 +57,17 @@
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
               />
             </svg>
-            <span class="font-bold">+52 722 387 3457</span>
+            <a href="tel:+527223873457" class="font-bold hover:text-[#83B7AB]">+52 722 387 3457</a>
           </div>
         </div>
       </div>
 
-      <!-- Zinacantepec Location -->
+      <!-- Ubicación (única clínica) -->
       <div class="space-y-4">
         <h4
           class="text-sm font-bold uppercase tracking-widest text-slate-300 pb-2 border-b border-slate-800"
         >
-          Sucursal Zinacantepec
+          Ubicación
         </h4>
         <div class="flex flex-col gap-2 text-sm text-slate-400 font-light">
           <p class="leading-relaxed">
@@ -72,7 +76,7 @@
             San Miguel Zinacantepec, Méx.
           </p>
           <a
-            href="https://maps.app.goo.gl/7MtSqZ5jXktPMU1W9?g_st=aw"
+            href={clinic.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
             class="group flex items-center gap-2 mt-2 text-[#83B7AB] hover:text-white transition-colors"
@@ -96,51 +100,7 @@
             >
             <span
               class="text-xs uppercase tracking-widest font-bold border-b border-[#83B7AB]/30 group-hover:border-white"
-              >Ver en Maps</span
-            >
-          </a>
-        </div>
-      </div>
-
-      <!-- Ixtlahuaca Location -->
-      <div class="space-y-4">
-        <h4
-          class="text-sm font-bold uppercase tracking-widest text-slate-300 pb-2 border-b border-slate-800"
-        >
-          Sucursal Ixtlahuaca
-        </h4>
-        <div class="flex flex-col gap-2 text-sm text-slate-400 font-light">
-          <p class="leading-relaxed">
-            Local 13, Centro Comercial "Plaza Santo Domingo"<br />
-            Avenida de los Maestros, San Joaquin Junco<br />
-            50740, Ixtlahuaca de Rayón, Méx.
-          </p>
-          <a
-            href="https://maps.app.goo.gl/vJwuaWQQeyBXNSX29?g_st=aw"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group flex items-center gap-2 mt-2 text-[#83B7AB] hover:text-white transition-colors"
-          >
-            <svg
-              class="w-4 h-4 group-hover:scale-110 transition-transform"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              ><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-              /><path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-              /></svg
-            >
-            <span
-              class="text-xs uppercase tracking-widest font-bold border-b border-[#83B7AB]/30 group-hover:border-white"
-              >Ver en Maps</span
+              >Cómo llegar</span
             >
           </a>
         </div>
@@ -212,7 +172,7 @@
     </div>
 
     <div
-      class="mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light tracking-wider text-slate-500 uppercase"
+      class="mt-16 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-light tracking-wider text-white/60 uppercase"
     >
       <p>
         &copy; {new Date().getFullYear()} Clínica Cardie. Todos los derechos reservados.

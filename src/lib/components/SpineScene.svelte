@@ -1,7 +1,7 @@
 <script lang="ts">
   // Explorador 3D de la columna (sección "Biomecánica").
   // Three.js y el modelo se cargan solo cuando la sección se acerca a la pantalla.
-  import { onMount } from 'svelte';
+  import { onMount, tick } from 'svelte';
   import { fly, fade } from 'svelte/transition';
   import type { SpineViewer, RegionKey, HoverInfo } from '$lib/three/spine-viewer';
 
@@ -39,10 +39,20 @@
   let narrow = $state(false);
   const current = $derived(regions.find((r) => r.key === selected) ?? null);
 
+  let sheet = $state<HTMLElement>();
+
   function choose(key: RegionKey | null) {
     selected = selected === key ? null : key;
     viewer?.select(selected);
     interacted = true;
+    revealSheet();
+  }
+
+  // En celular la ficha va debajo del modelo: la acercamos a la vista sin tapar la columna
+  async function revealSheet() {
+    if (!narrow || !selected) return;
+    await tick();
+    sheet?.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }
 
   onMount(() => {
@@ -60,10 +70,10 @@
         if (disposed) return;
         viewer = await createSpineViewer(container, {
           onHover: (h) => (hover = h),
-          onSelect: (r) => { selected = r; interacted = true; },
+          onSelect: (r) => { selected = r; interacted = true; revealSheet(); },
           onInteract: () => (interacted = true),
           onFailure: () => { ready = false; failed = true; },
-          panelSide: () => (mq.matches ? 'bottom' : 'right')
+          panelSide: () => (mq.matches ? 'none' : 'right')
         });
         if (disposed) { viewer.destroy(); return; }
         ready = true;
@@ -80,6 +90,22 @@
   });
 </script>
 
+{#snippet cardBody(r: Region)}
+  <header>
+    <p class="range">{r.range}</p>
+    <h3>Región {r.name.toLowerCase()}</h3>
+    <p class="count">{r.count}</p>
+  </header>
+  <p class="role">{r.role}</p>
+  <p class="signs-title">Suele relacionarse con</p>
+  <ul>
+    {#each r.signs as s}<li>{s}</li>{/each}
+  </ul>
+  <a href="#contact" class="cta">Agendar valoración</a>
+  <button class="close" aria-label="Cerrar y ver la columna completa" onclick={() => choose(null)}>×</button>
+{/snippet}
+
+<div class="stage relative z-10 w-full overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-2xl aspect-[4/5] sm:aspect-[5/6] lg:aspect-[4/5] max-h-[78svh] sm:max-h-[820px]">
 <div class="explorer" bind:this={container} data-ready={ready}>
   <img class:hidden={ready} class="poster" src="/models/spine-poster.png" alt="Modelo ilustrativo de la columna vertebral y la pelvis" loading="lazy" />
   <div class="glow" aria-hidden="true"></div>
@@ -98,21 +124,10 @@
     <span class="tip" style="left:{hover.x}px; top:{hover.y}px">{hover.label}</span>
   {/if}
 
-  {#if current}
+  {#if current && !narrow}
     {#key current.key}
-      <article class="card" class:bottom={narrow} in:fly={{ x: narrow ? 0 : 24, y: narrow ? 24 : 0, duration: 380 }} aria-live="polite">
-        <header>
-          <p class="range">{current.range}</p>
-          <h3>Región {current.name.toLowerCase()}</h3>
-          <p class="count">{current.count}</p>
-        </header>
-        <p class="role">{current.role}</p>
-        <p class="signs-title">Suele relacionarse con</p>
-        <ul>
-          {#each current.signs as s}<li>{s}</li>{/each}
-        </ul>
-        <a href="#contact" class="cta">Agendar valoración</a>
-        <button class="close" aria-label="Cerrar y ver la columna completa" onclick={() => choose(null)}>×</button>
+      <article class="card" in:fly={{ x: 24, duration: 380 }} aria-live="polite">
+        {@render cardBody(current)}
       </article>
     {/key}
   {/if}
@@ -128,6 +143,15 @@
 
   {#if failed}<span class="fallback">Columna vertebral · vista ilustrativa</span>{/if}
 </div>
+</div>
+
+{#if current && narrow}
+  {#key current.key}
+    <article class="card sheet" bind:this={sheet} in:fly={{ y: 16, duration: 320 }} aria-live="polite">
+      {@render cardBody(current)}
+    </article>
+  {/key}
+{/if}
 
 <style>
   .explorer { position:absolute; inset:0; overflow:hidden; isolation:isolate; color:#fff;
@@ -150,7 +174,12 @@
 
   .card { position:absolute; z-index:4; top:64px; right:16px; width:min(250px,46%); padding:18px 18px 16px; border-radius:16px; color:#0f2f3a;
     background:rgba(255,255,255,.94); box-shadow:0 18px 40px -12px rgba(8,34,44,.55); backdrop-filter:blur(12px); }
-  .card.bottom { top:auto; right:12px; left:12px; bottom:72px; width:auto; padding:14px 16px; }
+  .card.sheet { position:relative; top:auto; right:auto; width:auto; margin-top:12px; padding:18px 18px 16px; scroll-margin-bottom:16px;
+    background:#fff; border:1px solid #e2e8f0; box-shadow:0 14px 30px -14px rgba(8,34,44,.35); }
+  .card.sheet ul { flex-direction:row; flex-wrap:wrap; gap:6px; }
+  .card.sheet li { padding:5px 10px; border-radius:999px; background:#f1f7f6; font-size:12px; }
+  .card.sheet li::before { display:none; }
+  .card.sheet .cta { display:block; text-align:center; padding:12px; }
   .card header { margin-bottom:10px; }
   .range { font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; color:#538f83; }
   .card h3 { font-size:19px; font-weight:900; line-height:1.15; color:#215a69; margin-top:2px; }
@@ -160,8 +189,6 @@
   .card ul { margin-top:6px; display:flex; flex-direction:column; gap:4px; }
   .card li { position:relative; padding-left:14px; font-size:13px; color:#1e293b; }
   .card li::before { content:''; position:absolute; left:0; top:.55em; width:6px; height:6px; border-radius:50%; background:#83b7ab; }
-  .card.bottom ul { flex-direction:row; flex-wrap:wrap; gap:4px 12px; }
-  .card.bottom .role { font-size:12.5px; }
   .cta { display:inline-block; margin-top:12px; font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
     color:#fff; background:#215a69; padding:9px 14px; border-radius:8px; transition:background .2s; }
   .cta:hover { background:#0f172a; }
