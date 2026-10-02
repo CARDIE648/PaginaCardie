@@ -217,6 +217,12 @@
       <p>
         &copy; {new Date().getFullYear()} Clínica Cardie. Todos los derechos reservados.
       </p>
+      <!-- Firma del desarrollador (Meztli Ocelotl) -->
+      <meztli-firma cliente="cardie" alineacion="derecha"></meztli-firma>
     </div>
   </div>
 </footer>
+
+<svelte:head>
+  <script src="https://meztliocelotl.com/firma/firma.js" defer></script>
+</svelte:head>
