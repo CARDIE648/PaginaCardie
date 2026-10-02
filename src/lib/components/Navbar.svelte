@@ -17,21 +17,39 @@
     : 'bg-transparent py-6 border-b border-transparent'} lg:px-16 px-6"
 >
   <div class="max-w-[1800px] mx-auto flex justify-between items-center">
-    <!-- Left Side: Text Logo -->
-    <div class="flex flex-col">
-      <a
-        href="#hero"
-        class="group flex items-center gap-3 w-fit transition-transform hover:scale-105"
+    <!-- Left Side: Logo horizontal (icono + nombre) -->
+    <a
+      href="#hero"
+      class="group flex items-center gap-3 md:gap-4 w-fit"
+      aria-label="CARDIE Quiropráctico, ir al inicio"
+    >
+      <img
+        src="/LogoIcono.png"
+        alt=""
+        width="144"
+        height="192"
+        class="w-auto drop-shadow-sm transition-all duration-500 group-hover:-rotate-3 group-hover:scale-105 {scrolled
+          ? 'h-11 md:h-12'
+          : 'h-14 md:h-[4.5rem]'}"
+      />
+      <span
+        class="flex flex-col leading-none pl-3 md:pl-4 border-l border-[#215A69]/25"
       >
-        <div class="flex flex-col">
-          <img
-            src="/Logo3png.png"
-            alt="Logo Cardie Klinik"
-            class="h-20 md:h-24 w-auto drop-shadow-md transition-all group-hover:scale-110"
-          />
-        </div></a
-      >
-    </div>
+        <span
+          class="font-serif font-semibold text-[#215A69] tracking-[0.06em] transition-all duration-500 {scrolled
+            ? 'text-2xl md:text-[1.7rem]'
+            : 'text-[1.7rem] md:text-[2.3rem]'}">CARDIE</span
+        >
+        <span
+          class="mt-1 text-[10px] md:text-[12px] font-extrabold uppercase tracking-[0.22em] text-[#215A69]"
+          >Quiropráctico</span
+        >
+        <span
+          class="hidden sm:block mt-1 text-[8px] md:text-[9px] font-semibold uppercase tracking-[0.18em] text-[#215A69]/60"
+          >Salud vertebral y bienestar</span
+        >
+      </span>
+    </a>
 
     <!-- Right Side: Clean Navigation Links -->
     <div class="hidden lg:flex items-center gap-12">
