@@ -1,41 +1,5 @@
 <script>
-  import { onMount } from "svelte";
-
-  // Control de Video en bucle cinemático
-  const videos = ["/Video1.mp4", "/Video2.mp4"];
-  let activeIndex = $state(0);
-  /** @type {HTMLVideoElement | undefined} */
-  let v1_el;
-  /** @type {HTMLVideoElement | undefined} */
-  let v2_el;
-
-  const handleEnded1 = () => {
-    activeIndex = 1;
-    if (v2_el) {
-      v2_el.currentTime = 0;
-      v2_el.play().catch(() => {});
-    }
-  };
-  const handleEnded2 = () => {
-    activeIndex = 0;
-    if (v1_el) {
-      v1_el.currentTime = 0;
-      v1_el.play().catch(() => {});
-    }
-  };
-
-  // Función para scroll suave a la siguiente sección
-  const scrollToNext = () => {
-    const nextSection = document.getElementById("about");
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  onMount(() => {
-    // Asegurar que el primer video empiece
-    if (v1_el) v1_el.play().catch(() => {});
-  });
+  import HeroVideo from './HeroVideo.svelte';
 </script>
 
 <section
@@ -61,7 +25,7 @@
         </h4>
 
         <h1
-          class="text-6xl sm:text-7xl md:text-8xl lg:text-[6rem] xl:text-[8rem] font-black uppercase tracking-[-0.05em] leading-[0.8] text-[#215A69] drop-shadow-sm transition-all duration-500 hover:tracking-tight animate-slideRight text-center lg:text-right lg:pr-4"
+          class="hero-word font-black uppercase tracking-[-0.05em] leading-[0.8] text-[#215A69] drop-shadow-sm transition-all duration-500 hover:tracking-tight animate-slideRight text-center lg:text-right lg:pr-4"
         >
           COLUMNA
         </h1>
@@ -105,38 +69,11 @@
     <div
       class="relative w-full lg:w-1/2 flex flex-col justify-center px-6 sm:px-12 lg:px-20 xl:pr-32 py-20 lg:py-0 min-h-[50vh] lg:min-h-screen lg:justify-start lg:pt-[35vh]"
     >
-      <!-- Background Cinematic Videos exclusively on the right side -->
-      <div
-        class="absolute inset-0 z-[-1] bg-slate-900 overflow-hidden shadow-inner"
-      >
-        <video
-          bind:this={v1_el}
-          src={videos[0]}
-          onended={handleEnded1}
-          autoplay
-          muted
-          playsinline
-          class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 {activeIndex ===
-          0
-            ? 'opacity-100'
-            : 'opacity-0'}"
-        ></video>
-        <video
-          bind:this={v2_el}
-          src={videos[1]}
-          onended={handleEnded2}
-          muted
-          playsinline
-          class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 {activeIndex ===
-          1
-            ? 'opacity-100'
-            : 'opacity-0'}"
-        ></video>
-      </div>
+      <HeroVideo />
 
-      <div class="relative flex flex-col lg:items-start">
+      <div class="relative flex flex-col lg:items-start pointer-events-none">
         <h1
-          class="text-6xl sm:text-7xl md:text-8xl lg:text-[6rem] xl:text-[8rem] font-black text-white uppercase tracking-[-0.05em] leading-[0.8] mb-8 drop-shadow-2xl animate-slideLeft text-center lg:text-left lg:pl-4"
+          class="hero-word font-black text-white uppercase tracking-[-0.05em] leading-[0.8] mb-8 drop-shadow-2xl animate-slideLeft text-center lg:text-left lg:pl-4"
         >
           BIENESTAR
         </h1>
@@ -157,66 +94,18 @@
         </div>
       </div>
 
-      <!-- Controls & Pagination: Organized globally -->
-
-      <!-- Vertical Pagination (Visible on Desktop/Tablet only) -->
-      <div
-        class="hidden sm:flex absolute right-6 lg:right-12 top-1/2 -translate-y-1/2 flex-col gap-6 z-30"
+      <!-- Invitación al explorador 3D de la siguiente sección -->
+      <a
+        href="#about"
+        class="group absolute bottom-6 left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-20 xl:left-24 lg:bottom-10 z-20 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 pl-2 pr-5 py-2 text-white backdrop-blur-md shadow-xl hover:bg-white hover:text-[#215A69] transition-colors"
       >
-        <div
-          class="p-1.5 rounded-full border border-white flex items-center justify-center cursor-pointer shadow-lg"
-        >
-          <div class="w-2 h-2 bg-white rounded-full"></div>
-        </div>
-        <div
-          class="w-2 h-2 bg-white/30 rounded-full mx-auto hover:bg-white transition-all cursor-pointer shadow-md"
-        ></div>
-        <div
-          class="w-2 h-2 bg-white/30 rounded-full mx-auto hover:bg-white transition-all cursor-pointer shadow-md"
-        ></div>
-      </div>
-
-      <!-- Navigation Arrows: Repositioned for center usability across devices -->
-      <div
-        class="absolute bottom-8 right-6 sm:bottom-12 sm:right-12 flex gap-3 z-30"
-      >
-        <button
-          onclick={scrollToNext}
-          class="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-xl border border-slate-200/50 bg-white/10 backdrop-blur-md text-white hover:bg-white hover:text-slate-900 transition-all shadow-xl hover:-translate-y-1"
-          aria-label="Anterior"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M15 19l-7-7 7-7"
-            /></svg
+        <span class="grid h-9 w-9 place-items-center rounded-full bg-white/20 group-hover:bg-[#215A69] group-hover:text-white transition-colors">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"
+            ><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3zm0 0v18m8-13.5L12 12 4 7.5" stroke-linecap="round" stroke-linejoin="round" /></svg
           >
-        </button>
-        <button
-          onclick={scrollToNext}
-          class="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-xl bg-slate-900 text-white hover:bg-[#215A69] transition-all shadow-2xl hover:-translate-y-1"
-          aria-label="Siguiente sección"
-        >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            ><path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5l7 7-7 7"
-            /></svg
-          >
-        </button>
-      </div>
+        </span>
+        <span class="text-[11px] font-bold uppercase tracking-[0.2em]">Explora tu columna en 3D</span>
+      </a>
     </div>
   </div>
 
@@ -237,6 +126,9 @@
 </section>
 
 <style>
+  .hero-word { font-size:clamp(3rem, 9vw, 6rem); }
+  @media(min-width:1024px) { .hero-word { font-size:clamp(3.5rem, 5.8vw, 8rem); } }
+  @media(prefers-reduced-motion:reduce) { .animate-fadeIn,.animate-fadeInDelay,.animate-slideRight,.animate-slideLeft { animation:none !important; } }
   /* Animations to enhance premium feel on load */
   .animate-fadeIn {
     animation: fadeIn 1s ease-out;

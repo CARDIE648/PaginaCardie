@@ -1,0 +1,135 @@
+{
+  "vertebrae": [
+    {
+      "name": "Lumbar_5",
+      "region": "Lumbar",
+      "height": 0
+    },
+    {
+      "name": "Lumbar_4",
+      "region": "Lumbar",
+      "height": 0.63
+    },
+    {
+      "name": "Lumbar_3",
+      "region": "Lumbar",
+      "height": 1.26
+    },
+    {
+      "name": "Lumbar_2",
+      "region": "Lumbar",
+      "height": 1.89
+    },
+    {
+      "name": "Lumbar_1",
+      "region": "Lumbar",
+      "height": 2.52
+    },
+    {
+      "name": "Thoracic_12",
+      "region": "Thoracic",
+      "height": 3.15
+    },
+    {
+      "name": "Thoracic_11",
+      "region": "Thoracic",
+      "height": 3.65
+    },
+    {
+      "name": "Thoracic_10",
+      "region": "Thoracic",
+      "height": 4.15
+    },
+    {
+      "name": "Thoracic_9",
+      "region": "Thoracic",
+      "height": 4.65
+    },
+    {
+      "name": "Thoracic_8",
+      "region": "Thoracic",
+      "height": 5.15
+    },
+    {
+      "name": "Thoracic_7",
+      "region": "Thoracic",
+      "height": 5.65
+    },
+    {
+      "name": "Thoracic_6",
+      "region": "Thoracic",
+      "height": 6.15
+    },
+    {
+      "name": "Thoracic_5",
+      "region": "Thoracic",
+      "height": 6.65
+    },
+    {
+      "name": "Thoracic_4",
+      "region": "Thoracic",
+      "height": 7.15
+    },
+    {
+      "name": "Thoracic_3",
+      "region": "Thoracic",
+      "height": 7.65
+    },
+    {
+      "name": "Thoracic_2",
+      "region": "Thoracic",
+      "height": 8.15
+    },
+    {
+      "name": "Thoracic_1",
+      "region": "Thoracic",
+      "height": 8.65
+    },
+    {
+      "name": "Cervical_7",
+      "region": "Cervical",
+      "height": 9.15
+    },
+    {
+      "name": "Cervical_6",
+      "region": "Cervical",
+      "height": 9.54
+    },
+    {
+      "name": "Cervical_5",
+      "region": "Cervical",
+      "height": 9.93
+    },
+    {
+      "name": "Cervical_4",
+      "region": "Cervical",
+      "height": 10.32
+    },
+    {
+      "name": "Cervical_3",
+      "region": "Cervical",
+      "height": 10.71
+    },
+    {
+      "name": "Cervical_2",
+      "region": "Cervical",
+      "height": 11.1
+    },
+    {
+      "name": "Cervical_1",
+      "region": "Cervical",
+      "height": 11.49
+    }
+  ],
+  "count": 24,
+  "source": "Original procedural Blender model",
+  "purpose": "Stylized web illustration; not a clinical reference",
+  "pelvis": {
+    "sacral_foramina_pairs": 4,
+    "hip_bones": 2,
+    "acetabula": 2,
+    "obturator_foramina": 2,
+    "coccygeal_segments": 4
+  },
+  "glb_bytes": 1881524
+}

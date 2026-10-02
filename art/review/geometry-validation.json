@@ -1,0 +1,18 @@
+{
+  "Sacrum": {
+    "vertices": 14458,
+    "non_manifold_edges": 0,
+    "volume": 1.9125
+  },
+  "Pelvis_Left": {
+    "vertices": 6742,
+    "non_manifold_edges": 0,
+    "volume": 1.8201
+  },
+  "Pelvis_Right": {
+    "vertices": 6634,
+    "non_manifold_edges": 0,
+    "volume": 1.8215
+  },
+  "animation": "CARDIE \u00b7 slow inspection"
+}

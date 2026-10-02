@@ -1,6 +1,12 @@
 <script>
   import { onMount } from "svelte";
   let scrolled = $state(false);
+  // Sin scroll los enlaces quedan sobre el video del hero: en blanco para que se lean
+  const linkClass = $derived(
+    scrolled
+      ? "text-[#215A69] hover:text-slate-900"
+      : "text-white/90 hover:text-white [text-shadow:0_1px_8px_rgba(8,30,38,.55)]",
+  );
 
   onMount(() => {
     const handleScroll = () => {
@@ -55,22 +61,22 @@
     <div class="hidden lg:flex items-center gap-12">
       <a
         href="#hero"
-        class="text-[12px] font-bold uppercase tracking-[0.15em] text-[#215A69] hover:text-slate-900 transition-colors"
+        class="text-[12px] font-bold uppercase tracking-[0.15em] transition-colors {linkClass}"
         >Inicio</a
       >
       <a
         href="#about"
-        class="text-[12px] font-bold uppercase tracking-[0.15em] text-[#215A69] hover:text-slate-900 transition-colors"
+        class="text-[12px] font-bold uppercase tracking-[0.15em] transition-colors {linkClass}"
         >Nosotros</a
       >
       <a
         href="#packages"
-        class="text-[12px] font-bold uppercase tracking-[0.15em] text-[#215A69] hover:text-slate-900 transition-colors"
+        class="text-[12px] font-bold uppercase tracking-[0.15em] transition-colors {linkClass}"
         >Servicios</a
       >
       <a
         href="#contact"
-        class="text-[12px] font-bold uppercase tracking-[0.15em] text-[#215A69] hover:text-slate-900 transition-colors"
+        class="text-[12px] font-bold uppercase tracking-[0.15em] transition-colors {linkClass}"
         >Ubicación</a
       >
       <a

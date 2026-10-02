@@ -1,0 +1,7 @@
+__pycache__/
+*.blend1
+review/*.log
+review/spine-before-pelvis-refinement.blend
+render/
+cardie-hero-video.blend1
+review/previous-web/
